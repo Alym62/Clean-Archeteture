@@ -1,7 +1,8 @@
 package org.registry.people.infra.controller;
 
 import lombok.AllArgsConstructor;
-import org.registry.people.core.usecases.CreatePeopleUseCase;
+import org.registry.people.core.usecases.create.CreatePeopleUseCase;
+import org.registry.people.core.usecases.fetch.FetchAllPeopleUseCase;
 import org.registry.people.infra.helpers.MapperPeople;
 import org.registry.people.infra.payload.PeopleRecordDTO;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 public class PeopleController {
     private final CreatePeopleUseCase createPeopleUseCase;
+    private final FetchAllPeopleUseCase fetchAllPeopleUseCase;
 
     @GetMapping
     public ResponseEntity<List<PeopleRecordDTO>> fetchAllPeople() {
-        var listPeople = createPeopleUseCase.fetchAll()
+        var listPeople = fetchAllPeopleUseCase.fetchAll()
                 .stream()
                 .map(MapperPeople::recordEntityToDTORecord).toList();
 
