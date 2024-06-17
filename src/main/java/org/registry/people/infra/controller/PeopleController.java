@@ -26,7 +26,7 @@ public class PeopleController {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(dto)
+                .buildAndExpand(people.id())
                 .toUri();
 
         return ResponseEntity.created(uri).body(MapperPeople.recordEntityToDTORecord(people));
