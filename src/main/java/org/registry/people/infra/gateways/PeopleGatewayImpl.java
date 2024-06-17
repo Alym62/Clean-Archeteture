@@ -7,6 +7,7 @@ import org.registry.people.infra.helpers.MapperPeople;
 import org.registry.people.infra.repository.PeopleRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -24,5 +25,12 @@ public class PeopleGatewayImpl implements PeopleGateway {
     public Optional<People> CpfOrCnpjExists(String cpfOrCnpj) {
         return repository.findByCpfOrCnpj(cpfOrCnpj)
                 .map(MapperPeople::modelToRecordEntity);
+    }
+
+    @Override
+    public List<People> fetchAll() {
+        return repository.findAll()
+                .stream()
+                .map(MapperPeople::modelToRecordEntity).toList();
     }
 }

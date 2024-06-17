@@ -4,6 +4,8 @@ import org.registry.people.core.entity.People;
 import org.registry.people.core.exceptions.BusinessException;
 import org.registry.people.core.gateways.PeopleGateway;
 
+import java.util.List;
+
 public class CreatePeopleUseCaseImpl implements CreatePeopleUseCase {
     private final PeopleGateway gateway;
 
@@ -19,5 +21,10 @@ public class CreatePeopleUseCaseImpl implements CreatePeopleUseCase {
             return gateway.create(people);
         else
             throw new BusinessException("Já existe um usuário com esse CPF ou CNPJ! " + peopleExists.get().cpfOrCnpj());
+    }
+
+    @Override
+    public List<People> fetchAll() {
+        return gateway.fetchAll();
     }
 }
